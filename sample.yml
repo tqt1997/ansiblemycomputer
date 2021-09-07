@@ -1,0 +1,23 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: update
+      apt:
+        update_cache: true
+- hosts: db
+  become: true
+  tasks:
+    - name: install apache2 and 
+      tags: apache2
+      apt:
+        name:
+          - apache2
+          - libapache2-mod-php
+    - name: copy file
+      tags: copy
+      copy:
+        src: default.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
