@@ -1,4 +1,5 @@
 [web]
-t@192.168.190.129
+192.168.190.129 ansible_user=t
 [db]
-t@192.168.190.130
+192.168.190.130 ansible_user=t
+192.168.190.132 ansible_user=tinh
