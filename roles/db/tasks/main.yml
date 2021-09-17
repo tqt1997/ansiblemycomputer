@@ -1,0 +1,4 @@
+- name: cai dat mysql
+  apt:
+    name: mysql-server
+    state: latest

@@ -1,28 +1,16 @@
 - hosts: all
   become: true
-  tasks:
-    - name: update
-      apt:
-        update_cache: true
-- hosts: db
+  roles:
+    - base
+- hosts: web
+  vars_files:
+    - roles/web/host_vars/192.168.190.129.yml
   become: true
-  tasks:
-    - name: install apache2 and 
-      tags: apache2
-      apt:
-        name:
-          - "{{ apache_package_name }}"
-          - "{{ php_package_name }}"
-    - name: copy file
-      tags: copy
-      copy:
-        src: default.html
-        dest: /var/www/html/index.html
-        owner: root
-        group: root
-        mode: 0644
-    - name: stop service http
-      service:
-        name: apache2
-        state: started
-        
+  roles:
+    - web
+- hosts: db
+  vars_files:
+    - host_vars/mysql_var/main.yml
+  become: true
+  roles:
+    - db
